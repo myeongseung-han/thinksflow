@@ -16,8 +16,8 @@ function IssueListPage() {
     const setSelectedIssue = useSetRecoilState(selectedIssueState);
 
     useEffect(() => {
-        setIssueList([...issueList, ...issueListPerPage]);
-    }, [issueListPerPage]);
+        setIssueList(prevIssueList => [...prevIssueList, ...issueListPerPage]);
+    }, [issueListPerPage, setIssueList]);
 
     function handleIssueSelect(issue: GithubIssue) {
         setSelectedIssue(issue);
