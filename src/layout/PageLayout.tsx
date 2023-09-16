@@ -12,6 +12,12 @@ function PageLayout({children}: Props) {
             <Box
                 display="flex"
                 justifyContent="center"
+                position="sticky"
+                top="0"
+                height="3rem"
+                sx={{
+                    backgroundColor: "white",
+                }}
             >
                 <Typography variant="h5">Angular / Angular-cli</Typography>
             </Box>
