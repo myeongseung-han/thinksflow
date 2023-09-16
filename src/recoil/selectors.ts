@@ -1,9 +1,12 @@
-import { selectorFamily } from "recoil";
+import { selector } from "recoil";
 import octokit from "../api/octokit";
+import { pageState } from "./atoms";
 
-export const issueListPerPageState = selectorFamily({
+export const issueListPerPageState = selector({
     key: 'issueListPerPage',
-    get: (page: number) => async () => {
+    get: async ({get}) => {
+        const page = get(pageState);
+
         if(page === 0) return [];
 
         const response = await octokit.request('GET /repos/{owner}/{repo}/issues?sort=comments&state=open&per_page=10&page={page}', {

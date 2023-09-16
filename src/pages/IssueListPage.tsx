@@ -1,23 +1,25 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { issueListPerPageState } from "../recoil/selectors";
 import { GithubIssue } from "../types";
-import { issueListState, selectedIssueState } from "../recoil/atoms";
+import { issueListState, pageState, selectedIssueState } from "../recoil/atoms";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 
 function IssueListPage() {
     const navigate = useNavigate();
 
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useRecoilState(pageState);
 
     const [issueList, setIssueList] = useRecoilState(issueListState);
-    const issueListPerPage: GithubIssue[] = useRecoilValue(issueListPerPageState(page));
+    const issueListPerPage: GithubIssue[] = useRecoilValue(issueListPerPageState);
     const setSelectedIssue = useSetRecoilState(selectedIssueState);
 
     useEffect(() => {
+        if(page * 10 === issueList.length) return;
+
         setIssueList(prevIssueList => [...prevIssueList, ...issueListPerPage]);
-    }, [issueListPerPage, setIssueList]);
+    }, [issueListPerPage, setIssueList, issueList.length, page]);
 
     function handleIssueSelect(issue: GithubIssue) {
         setSelectedIssue(issue);
@@ -37,12 +39,13 @@ function IssueListPage() {
         <>
             <div style={{
                 height: "calc(100vh - 6rem)",
+                width: "100%",
                 overflowY: "scroll",
             }}>
                 {issueList.map((issue, index) => {
                     return (
-                        <>
-                            <div key={issue.id} onClick={() => handleIssueSelect(issue)}>{issue.title}</div>
+                        <Fragment key={issue.id}>
+                            <div onClick={() => handleIssueSelect(issue)}>{issue.title}</div>
                             {(index + 1) % 10 === 0 &&
                                 <Link to="https://thingsflow.com/">
                                     <img 
@@ -51,7 +54,7 @@ function IssueListPage() {
                                     />
                                 </Link>
                             }
-                        </>
+                        </Fragment>
                     );
                 })}
             </div>

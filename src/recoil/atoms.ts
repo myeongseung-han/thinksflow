@@ -10,3 +10,8 @@ export const issueListState = atom<GithubIssue[]>({
     key: 'issueList',
     default: [],
 })
+
+export const pageState = atom<number>({
+    key: 'page',
+    default: 0,
+})
