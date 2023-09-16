@@ -49,6 +49,9 @@ function IssueListPage() {
                             {(index + 1) % 10 === 0 &&
                                 <Link to="https://thingsflow.com/">
                                     <img 
+                                        style={{
+                                            width: "100%"
+                                        }}
                                         alt="ad"
                                         src="https://hellobot-test.s3.ap-northeast-2.amazonaws.com/image/01fdd797-0477-4717-8d70-8551150463f7"
                                     />
