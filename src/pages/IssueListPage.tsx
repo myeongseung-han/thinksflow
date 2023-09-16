@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { issueListPerPageState } from "../recoil/selectors";
 import { GithubIssue } from "../types";
 import { issueListState, selectedIssueState } from "../recoil/atoms";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -43,7 +43,14 @@ function IssueListPage() {
                     return (
                         <>
                             <div key={issue.id} onClick={() => handleIssueSelect(issue)}>{issue.title}</div>
-                            {(index + 1) % 10 === 0 && <img alt="ad" src="https://hellobot-test.s3.ap-northeast-2.amazonaws.com/image/01fdd797-0477-4717-8d70-8551150463f7" />}
+                            {(index + 1) % 10 === 0 &&
+                                <Link to="https://thingsflow.com/">
+                                    <img 
+                                        alt="ad"
+                                        src="https://hellobot-test.s3.ap-northeast-2.amazonaws.com/image/01fdd797-0477-4717-8d70-8551150463f7"
+                                    />
+                                </Link>
+                            }
                         </>
                     );
                 })}
