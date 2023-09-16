@@ -1,17 +1,14 @@
 import { selector } from "recoil";
-import { bearerToken, getIssueListUrl } from "../constant";
+import octokit from "../api/octokit";
 
 export const issueListSelector = selector({
     key: 'issueList',
     get: async () => {
-        const response = await fetch(getIssueListUrl, {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${bearerToken}`
-            }
-          });
+        const response = await octokit.request('GET /repos/{owner}/{repo}/issues?sort=comments&state=open', {
+          owner: 'angular',
+          repo: 'angular-cli',
+        });
 
-        if(response.ok) return response.json();
-        return [];
+        return response.data;
     }
 })

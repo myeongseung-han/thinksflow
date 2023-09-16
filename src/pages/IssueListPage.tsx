@@ -18,7 +18,7 @@ function IssueListPage() {
     return (
         <>
             {issueList.map(issue => {
-                return <div onClick={() => handleIssueSelect(issue)}>{issue.title}</div>
+                return <div key={issue.id} onClick={() => handleIssueSelect(issue)}>{issue.title}</div>
             })}
         </>
     );
