@@ -1,9 +1,15 @@
+import { RecoilRoot } from 'recoil';
 import './App.css';
 import { Routes } from './Routes';
+import { Suspense } from 'react';
 
 function App() {
   return (
-    <Routes />
+    <RecoilRoot>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes />
+      </Suspense>
+    </RecoilRoot>
   );
 }
 
