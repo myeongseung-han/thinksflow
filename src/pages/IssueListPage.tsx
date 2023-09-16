@@ -7,7 +7,6 @@ function IssueListPage() {
     
     return (
         <>
-            <div>IssueListPage</div>
             {issueList.map(issue => {
                 return <div>{issue.title}</div>
             })}
