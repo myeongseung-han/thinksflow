@@ -27,6 +27,11 @@ function IssueListPage() {
     function handleLoadClick() {
         setPage(page + 1);
     }
+
+    function handleResetClick() {
+        setPage(0);
+        setIssueList([]);
+    }
     
     return (
         <>
@@ -37,10 +42,13 @@ function IssueListPage() {
                 display="flex"  
                 justifyContent="center"
                 mt={5}
+                position="fixed"
+                bottom="0"
+                width="100%"
             >
                 <Stack spacing={5} direction="row">
                     <Button variant="contained" onClick={handleLoadClick}>load</Button>
-                    <Button variant="outlined">초기화</Button>
+                    <Button variant="outlined" onClick={handleResetClick}>초기화</Button>
                 </Stack>
             </Box>
         </>
